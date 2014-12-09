@@ -22,8 +22,8 @@ def unfold_bookmarks(bookmarks, prefix = ""):
     return ret
 
 def make_unfolded_item(b):
-    ret = [b['title'], b['url']]
-    if 'desc' in b :
+    ret = [b['prefix'] + b['title'], b['url']]
+    if 'desc' in b:
         desc = b['desc']
         if type(desc) == list:
             ret.extend([str(d) for d in desc])
@@ -31,9 +31,44 @@ def make_unfolded_item(b):
             ret.apped(str(desc))
     return ret
 
+def make_folded_item(b):
+    ret = [b['title']]
+    
+    if is_page(b):
+        ret.append(b['url'])
+    else:
+        ret[0] = ret[0] + ' *'
+        ret.append('<folder>')
+    
+    if 'desc' in b:
+        desc = b['desc']
+        if type(desc) == list:
+            ret.extend([str(d) for d in desc])
+        else:
+            ret.apped(str(desc))
+    
+    return ret
+
 class BrowseFoldedBookmarkCommand(sublime_plugin.WindowCommand):
     def run(self, bookmarks = None):
-        pass
+        if bookmarks == None:
+            self.bookmarks = load_bookmarks()
+        else:
+            self.bookmarks = bookmarks
+        
+        items = [make_folded_item(b) for b in self.bookmarks]
+        self.window.show_quick_panel(items, self.on_done)
+        
+    def on_done(self, idx):
+        if idx < 0:
+            return
+        
+        b = self.bookmarks[idx]
+        if is_page(b):
+            webbrowser.open_new_tab(b['url'])
+        else:
+            sublime.set_timeout(lambda: self.window.run_command('browse_folded_bookmark', args = {'bookmarks': b['bookmarks']}), 1)
+            
 
 class BrowseUnfoldedBookmarkCommand(sublime_plugin.WindowCommand):
     def run(self):
