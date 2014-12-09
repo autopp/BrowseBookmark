@@ -8,7 +8,7 @@ def load_bookmarks():
     return sublime.load_settings(SETTINGS_FILE_NAME).get('bookmarks', [])
 
 def is_page(b):
-    return b['kind'] == 'page'
+    return 'url' in b
 
 def unfold_bookmarks(bookmarks, prefix = ""):
     ret = []
