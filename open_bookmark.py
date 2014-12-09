@@ -1,7 +1,9 @@
 import sublime
 import sublime_plugin
 
-SETTINGS_FILE_NAME = "OpenBookmark.sublime-settings"
+import webbrowser
+
+SETTINGS_FILE_NAME = "BrowseBookmark.sublime-settings"
 def load_bookmarks():
     return sublime.load_settings(SETTINGS_FILE_NAME).get('bookmarks', [])
 
@@ -19,11 +21,29 @@ def unfold_bookmarks(bookmarks, prefix = ""):
             
     return ret
 
-class OpenFoldedBookmarkCommand(sublime_plugin.WindowCommand):
+def make_unfolded_item(b):
+    ret = [b['title'], b['url']]
+    if 'desc' in b :
+        desc = b['desc']
+        if type(desc) == list:
+            ret.extend([str(d) for d in desc])
+        else:
+            ret.apped(str(desc))
+    return ret
+
+class BrowseFoldedBookmarkCommand(sublime_plugin.WindowCommand):
     def run(self, bookmarks = None):
         pass
 
-class OpenUnfoldedBookmarkCommand(sublime_plugin.WindowCommand):
+class BrowseUnfoldedBookmarkCommand(sublime_plugin.WindowCommand):
     def run(self):
-        bookmarks = unfold_bookmarks(load_bookmarks())
+        self.bookmarks = unfold_bookmarks(load_bookmarks())
+        items = [make_unfolded_item(b) for b in self.bookmarks]
+        self.window.show_quick_panel(items, self.on_done)
         
+    def on_done(self, idx):
+        if idx < 0:
+            return
+        
+        b = self.bookmarks[idx]
+        webbrowser.open_new_tab(b['url'])

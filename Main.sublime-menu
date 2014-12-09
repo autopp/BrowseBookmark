@@ -31,14 +31,14 @@
                 "caption": "Settings – Default",
                 "command": "open_file", "args":
                 {
-                  "file": "${packages}/OpenBookmark/OpenBookmark.sublime-settings"
+                  "file": "${packages}/OpenBookmark/BrowseBookmark.sublime-settings"
                 }
               },
               {
                 "caption": "Settings – User",
                 "command": "open_file", "args":
                 {
-                  "file": "${packages}/User/OpenBookmark.sublime-settings"
+                  "file": "${packages}/User/BrowseBookmark.sublime-settings"
                 }
               },
               {
