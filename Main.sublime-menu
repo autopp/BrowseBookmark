@@ -6,12 +6,12 @@
         "caption": "-"
       },
       {
-        "caption": "Open Bookmark",
-        "command": "open_folded_bookmark"
+        "caption": "Browse Bookmark",
+        "command": "browse_folded_bookmark"
       },
       {
-        "caption": "Open Bookmark (Unfolded)",
-        "command": "open_unfolded_bookmark"
+        "caption": "Browse Bookmark (Unfolded)",
+        "command": "browse_unfolded_bookmark"
       }
     ]
   },
@@ -25,13 +25,13 @@
         "mnemonic": "P",
         "children": [
           {
-            "caption": "OpenBookmark",
+            "caption": "BrowseBookmark",
             "children": [
               {
                 "caption": "Settings – Default",
                 "command": "open_file", "args":
                 {
-                  "file": "${packages}/OpenBookmark/BrowseBookmark.sublime-settings"
+                  "file": "${packages}/BrowseBookmark/BrowseBookmark.sublime-settings"
                 }
               },
               {
@@ -48,7 +48,7 @@
                   "caption": "Key Bindings – Default",
                   "command": "open_file", "args":
                   {
-                      "file": "${packages}/OpenBookmark/Default (OSX).sublime-keymap",
+                      "file": "${packages}/BrowseBookmark/Default (OSX).sublime-keymap",
                       "platform": "OSX"
                   }
               },
@@ -64,7 +64,7 @@
                   "caption": "Key Bindings – Default",
                   "command": "open_file", "args":
                   {
-                      "file": "${packages}/OpenBookmark/Default (Linux).sublime-keymap",
+                      "file": "${packages}/BrowseBookmark/Default (Linux).sublime-keymap",
                       "platform": "Linux"
                   }
               },
@@ -80,7 +80,7 @@
                   "caption": "Key Bindings – Default",
                   "command": "open_file", "args":
                   {
-                      "file": "${packages}/OpenBookmark/Default (Windows).sublime-keymap",
+                      "file": "${packages}/BrowseBookmark/Default (Windows).sublime-keymap",
                       "platform": "Windows"
                   }
               },
