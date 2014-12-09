@@ -1,0 +1,10 @@
+[
+  {
+    "caption": "BrowseBookmark: BrowseBookmark (Folded)",
+    "command": "browse_folded_bookmark"
+  },
+  {
+    "caption": "BrowseBookmark: BrowseBookmark (Unfolded)",
+    "command": "browse_unfolded_bookmark"
+  }
+]
