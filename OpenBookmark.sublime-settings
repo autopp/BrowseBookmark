@@ -1,0 +1,26 @@
+{
+  /*
+  "bookmarks": [
+    {
+      "kind": "page",
+      "title": "Google Search",
+      "url": "http://www.google.com"
+    },
+    {
+      "kind": "folder",
+      "title": "Ruby",
+      "bookmarks": [
+        {
+          "kind": "page",
+          "title": "Builtin Library",
+          "url": "http://docs.ruby-lang.org/ja/2.1.0/library/_builtin.html"
+        },
+        {
+          "kind": "page",
+          "title": "Standard Library",
+          "url": "http://docs.ruby-lang.org/ja/2.1.0/library/index.html"
+        }
+      ]
+    }
+  ]*/
+}
