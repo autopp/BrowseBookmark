@@ -22,14 +22,17 @@ def unfold_bookmarks(bookmarks, prefix = ""):
     return ret
 
 def make_unfolded_item(b):
-    ret = [b['prefix'] + b['title'], b['url']]
-    if 'desc' in b:
-        desc = b['desc']
-        if type(desc) == list:
-            ret.extend([str(d) for d in desc])
-        else:
-            ret.apped(str(desc))
+    ret = [b['prefix'] + b['title'], b['url'], str(b.get('desc', '<no description>'))]
     return ret
+
+def make_entry_text(n):
+    n = int(n)
+    if n == 0:
+        return "no entry"
+    elif n == 1:
+        return "1 entry"
+    else:
+        return "%d entries" % n
 
 def make_folded_item(b):
     ret = [b['title']]
@@ -37,15 +40,10 @@ def make_folded_item(b):
     if is_page(b):
         ret.append(b['url'])
     else:
-        ret[0] = ret[0] + ' *'
-        ret.append('<folder>')
+        ret[0] = ret[0] + '/'
+        ret.append("folder (%s)" % make_entry_text(len(b['bookmarks'])))
     
-    if 'desc' in b:
-        desc = b['desc']
-        if type(desc) == list:
-            ret.extend([str(d) for d in desc])
-        else:
-            ret.apped(str(desc))
+    ret.append(str(b.get('desc', '<no description>')))
     
     return ret
 
