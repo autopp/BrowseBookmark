@@ -6,5 +6,12 @@
   {
     "caption": "BrowseBookmark: BrowseBookmark (Unfolded)",
     "command": "browse_unfolded_bookmark"
+  },
+  {
+    "caption": "Preferences: BrowseBookmark Settings - User",
+    "command": "open_file",
+    "args": {
+      "file": "${packages}/User/BrowseBookmark.sublime-settings"
+    }
   }
 ]
