@@ -46,8 +46,12 @@ def make_folded_item(b):
     return ret
 
 class BrowseFoldedBookmarkCommand(sublime_plugin.WindowCommand):
-    def run(self, backtrace = []):
-        self.backtrace = backtrace
+    def run(self, backtrace = [], rec = False):
+        if rec:
+            self.backtrace = backtrace
+        else:
+            self.backtrace = []
+            
         if len(backtrace) == 0:
             self.bookmarks = load_bookmarks()
             top_item = ["** TOP LEVEL **", "cancel browsing"]
@@ -57,7 +61,7 @@ class BrowseFoldedBookmarkCommand(sublime_plugin.WindowCommand):
         
         items = [top_item]
         items.extend(make_folded_item(b) for b in self.bookmarks)
-        self.window.show_quick_panel(items, self.on_done)
+        self.window.show_quick_panel(items, self.on_done, 0, 1)
         
     def on_done(self, idx):
         if idx < 0:
@@ -67,14 +71,14 @@ class BrowseFoldedBookmarkCommand(sublime_plugin.WindowCommand):
                 return
             else:
                 self.backtrace.pop()
-                sublime.set_timeout(lambda: self.window.run_command('browse_folded_bookmark', args = {'backtrace': self.backtrace}), 1)
+                sublime.set_timeout(lambda: self.window.run_command('browse_folded_bookmark', args = {'backtrace': self.backtrace, 'rec': True}), 0)
         else:
             b = self.bookmarks[idx-1]
             if is_page(b):
                 webbrowser.open_new_tab(b['url'])
             else:
                 self.backtrace.append(b)
-                sublime.set_timeout(lambda: self.window.run_command('browse_folded_bookmark', args = {'backtrace': self.backtrace}), 1)
+                sublime.set_timeout(lambda: self.window.run_command('browse_folded_bookmark', args = {'backtrace': self.backtrace, 'rec': True}), 0)
             
 
 class BrowseUnfoldedBookmarkCommand(sublime_plugin.WindowCommand):
