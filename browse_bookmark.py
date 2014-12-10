@@ -22,7 +22,7 @@ def unfold_bookmarks(bookmarks, prefix = ""):
     return ret
 
 def make_unfolded_item(b):
-    ret = [b['prefix'] + b['title'], b['url'], str(b.get('desc', '<no description>'))]
+    ret = [b['prefix'] + b['title'], b['url']]
     return ret
 
 def make_entry_text(n):
@@ -42,8 +42,6 @@ def make_folded_item(b):
     else:
         ret[0] = ret[0] + '/'
         ret.append("folder (%s)" % make_entry_text(len(b['bookmarks'])))
-    
-    ret.append(str(b.get('desc', '<no description>')))
     
     return ret
 
